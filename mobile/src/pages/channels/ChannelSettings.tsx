@@ -1,5 +1,6 @@
 import { AddChannelMembers } from "@/components/features/channels"
 import { ArchiveChannelButton } from "@/components/features/channels/ArchiveChannel"
+import { ChannelInfoSection } from "@/components/features/channels/ChannelInfo"
 import { DeleteChannelButton } from "@/components/features/channels/DeleteChannel"
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonItem, IonItemDivider, IonItemGroup, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react"
 import { useRef, useState } from "react"
@@ -27,7 +28,7 @@ export const ChannelSettings = () => {
 
             <IonContent fullscreen={true}>
                 <IonList>
-
+                    <ChannelInfoSection channelID={channelID} />
                     <IonItem lines="full" button onClick={() => setIsOpen(true)}>
                         <div slot='start'>
                             <IoPersonAdd size='18' color='var(--ion-color-medium)' />
