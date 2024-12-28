@@ -97,6 +97,8 @@ const router = createBrowserRouter(
               <Route path="create" lazy={() => import('./pages/settings/MessageActions/CreateMessageAction')} />
               <Route path=":ID" lazy={() => import('./pages/settings/MessageActions/ViewMessageAction')} />
             </Route>
+
+            <Route path="help" lazy={() => import('./pages/settings/HelpAndSupport')} />
           </Route>
           <Route path=":workspaceID" element={<MainPage />}>
             <Route index element={<MobileTabsPage />} />
@@ -121,16 +123,18 @@ function App() {
 
   const [appearance, setAppearance] = useStickyState<'light' | 'dark' | 'inherit'>('dark', 'appearance');
 
-  // We need to pass sitename only if the Frappe version is v15 or above.
+  // We not need to pass sitename if the Frappe version is v14.
 
   const getSiteName = () => {
     // @ts-ignore
-    if (window.frappe?.boot?.versions?.frappe && (window.frappe.boot.versions.frappe.startsWith('15') || window.frappe.boot.versions.frappe.startsWith('16'))) {
+    if (window.frappe?.boot?.versions?.frappe.startsWith('14')) {
+      return import.meta.env.VITE_SITE_NAME
+    }
+    // @ts-ignore
+    else {
       // @ts-ignore
       return window.frappe?.boot?.sitename ?? import.meta.env.VITE_SITE_NAME
     }
-    return import.meta.env.VITE_SITE_NAME
-
   }
 
   return (
